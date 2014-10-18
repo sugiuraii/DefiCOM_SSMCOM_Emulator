@@ -195,7 +195,7 @@ namespace SSMEmulator
                 //スレッドフラグがfalseにされるまで続ける
                 while (_communicate_realtime_start)
                 {
-                    Thread.Sleep(50);
+                    Thread.Sleep(10);
 
                     byte[] outbuf = new byte[] { };
                     byte[] outbuf_header = new byte[] { 0x80, 0xf0, 0x10 };
