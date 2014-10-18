@@ -135,8 +135,6 @@ namespace DefiLinkEmulator
             serialPort1.BaudRate = DEFI_BAUD_RATE;
             serialPort1.Parity = Parity.Even;
             serialPort1.ReadTimeout = 500;
-            serialPort1.StopBits = StopBits.One;
-            serialPort1.DataBits = 8;
 
             _boost = 0;
             _tacho = 0;

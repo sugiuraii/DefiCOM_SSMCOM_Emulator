@@ -132,8 +132,8 @@ namespace SSMEmulator
 
         private SSM_Content_Table _content_table;
 
-        //SSM baudrate
-        private const int SSM_BAUD_RATE = 4800;
+        const int SSM_BAUD_RATE = 4800;
+        //DefiLinkボーレート設定
 
         public SSMComOUT()
         {
@@ -237,38 +237,6 @@ namespace SSMEmulator
             }
         }
 
-        private byte[] read_ssm_packet()
-        {
-            byte singlebyte_buf;
-
-            do
-            {
-                singlebyte_buf = (byte)serialPort1.ReadByte();
-            }while (singlebyte_buf != 0x80);
-
-            byte[] inbuf = new byte[4];
-            inbuf[0] = 0x80;
-            inbuf[1] = (byte)serialPort1.ReadByte(); // Dest byte (shuould be 0x10 (ECU))
-            inbuf[2] = (byte)serialPort1.ReadByte(); // Source byte (should be 0xF0)(DIGTOOL)
-            inbuf[3] = (byte)serialPort1.ReadByte(); // Size byte
-
-            int data_length = (int)inbuf[3];
-            int i;
-
-            List<byte> data_content = new List<byte>();
-            for (i = 0; i < data_length; i++)
-            {
-                data_content.Add((byte)serialPort1.ReadByte());
-            }
-
-            //read checksum byte
-            data_content.Add((byte)serialPort1.ReadByte());
-
-            inbuf = inbuf.Concat(data_content.ToArray()).ToArray();
-
-            return inbuf;
-        }
-
         private void communicate_realtime()
         {
             //ポートオープン
@@ -278,13 +246,7 @@ namespace SSMEmulator
                 //スレッドフラグがfalseにされるまで続ける
                 while (_communicate_realtime_start)
                 {
-                    if(serialPort1.BytesToRead == 0)
-                    {
-                        Thread.Sleep(10);
-                        continue;
-                    }
-
-                    byte[] inbuf = read_ssm_packet();
+                    Thread.Sleep(10);
 
                     byte[] outbuf = new byte[] { };
                     byte[] outbuf_header = new byte[] { 0x80, 0xf0, 0x10 };
@@ -295,89 +257,96 @@ namespace SSMEmulator
                     int i = 0;
                     int j,k;
 
-                    if ((inbuf[0] != 0x80) || (inbuf[1] != 0x10) || (inbuf[2] != 0xF0) || (inbuf[4] != 0xA8))
-                        continue;
-
-                    //データ長読み取り
-                    int data_length = (int)inbuf[3];
-
-                    //Queryアドレス数計算(Command Padding byte除いたデータ長/3 (アドレス長3バイト)
-                    int num_addresses = (data_length - 2) / 3;
-
-                    for (i = 0; i < num_addresses; i++)
+                    if (serialPort1.BytesToRead > 6)
                     {
-                        j = 6 + 3 * i;
-                        byte[] address = new byte[3];
-                        address[0] = inbuf[j];
-                        address[1] = inbuf[j+1];
-                        address[2] = inbuf[j+2];
+                        Thread.Sleep(30); //相手側のタイムアウトが500msを仮定
+                        byte[] inbuf = new byte[serialPort1.BytesToRead];
+                        serialPort1.Read(inbuf,0,serialPort1.BytesToRead);
 
-                        foreach (SSM_Parameter_Code code in Enum.GetValues(typeof(SSM_Parameter_Code)))
+                        if ((inbuf[0] != 0x80) || (inbuf[1] != 0x10) || (inbuf[2] != 0xF0) || (inbuf[4] != 0xA8))
+                            continue;
+
+                        //データ長読み取り
+                        int data_length = (int)inbuf[3];
+
+                        //Queryアドレス数計算(Command Padding byte除いたデータ長/3 (アドレス長3バイト)
+                        int num_addresses = (data_length - 2) / 3;
+
+                        for (i = 0; i < num_addresses; i++)
                         {
-                            if (_content_table[code].Read_Address.Length == 3)
+                            j = 6 + 3 * i;
+                            byte[] address = new byte[3];
+                            address[0] = inbuf[j];
+                            address[1] = inbuf[j+1];
+                            address[2] = inbuf[j+2];
+
+                            foreach (SSM_Parameter_Code code in Enum.GetValues(typeof(SSM_Parameter_Code)))
                             {
-                                if (address.SequenceEqual(_content_table[code].Read_Address))
+                                if (_content_table[code].Read_Address.Length == 3)
                                 {
-                                    byte[] new_data = new byte[1];
-                                    new_data[0] = (byte)_content_table[code].Raw_Value;
-                                    outbuf_content = outbuf_content.Concat(new_data).ToArray();
-                                    break;
+                                    if (address.SequenceEqual(_content_table[code].Read_Address))
+                                    {
+                                        byte[] new_data = new byte[1];
+                                        new_data[0] = (byte)_content_table[code].Raw_Value;
+                                        outbuf_content = outbuf_content.Concat(new_data).ToArray();
+                                        break;
+                                    }
                                 }
-                            }
-                            else if (_content_table[code].Read_Address.Length == 6)
-                            {
-                                //MSB処理
-                                byte[] content_address_msb = new byte[3];
-                                content_address_msb[0] = _content_table[code].Read_Address[0];
-                                content_address_msb[1] = _content_table[code].Read_Address[1];
-                                content_address_msb[2] = _content_table[code].Read_Address[2];
-                                if (address.SequenceEqual(content_address_msb))
+                                else if (_content_table[code].Read_Address.Length == 6)
                                 {
-                                    byte[] new_data = new byte[1];
-                                    new_data[0] = (byte)((_content_table[code].Raw_Value & 0xFF00) >> 8);
-                                    outbuf_content = outbuf_content.Concat(new_data).ToArray();
-                                    break;
+                                    //MSB処理
+                                    byte[] content_address_msb = new byte[3];
+                                    content_address_msb[0] = _content_table[code].Read_Address[0];
+                                    content_address_msb[1] = _content_table[code].Read_Address[1];
+                                    content_address_msb[2] = _content_table[code].Read_Address[2];
+                                    if (address.SequenceEqual(content_address_msb))
+                                    {
+                                        byte[] new_data = new byte[1];
+                                        new_data[0] = (byte)((_content_table[code].Raw_Value) & (0xFF00) >> 8);
+                                        outbuf_content = outbuf_content.Concat(new_data).ToArray();
+                                        break;
+                                    }
+                                    //LSB処理
+                                    byte[] content_address_lsb = new byte[3];
+                                    content_address_msb[0] = _content_table[code].Read_Address[3];
+                                    content_address_msb[1] = _content_table[code].Read_Address[4];
+                                    content_address_msb[2] = _content_table[code].Read_Address[5];
+                                    if (address.SequenceEqual(content_address_lsb))
+                                    {
+                                        byte[] new_data = new byte[1];
+                                        new_data[0] = (byte)((_content_table[code].Raw_Value) & (0x00FF));
+                                        outbuf_content = outbuf_content.Concat(new_data).ToArray();
+                                        break;
+                                    }
                                 }
-                                //LSB処理
-                                byte[] content_address_lsb = new byte[3];
-                                content_address_lsb[0] = _content_table[code].Read_Address[3];
-                                content_address_lsb[1] = _content_table[code].Read_Address[4];
-                                content_address_lsb[2] = _content_table[code].Read_Address[5];
-                                if (address.SequenceEqual(content_address_lsb))
+                                else
                                 {
-                                    byte[] new_data = new byte[1];
-                                    new_data[0] = (byte)((_content_table[code].Raw_Value) & (0x00FF));
-                                    outbuf_content = outbuf_content.Concat(new_data).ToArray();
-                                    break;
+                                    throw new InvalidOperationException("Content Tableのアドレス長が不正です");
                                 }
-                            }
-                            else
-                            {
-                                throw new InvalidOperationException("Content Tableのアドレス長が不正です");
                             }
                         }
+                        outbuf_length[0] = (byte)outbuf_content.Length;
+
+                        //連結
+                        outbuf = outbuf.Concat(outbuf_header).ToArray();
+                        outbuf = outbuf.Concat(outbuf_length).ToArray();
+                        outbuf = outbuf.Concat(outbuf_content).ToArray();
+
+                        //チェックサム計算
+                        int outbuf_sum = 0;
+                        for (k = 0; k < outbuf.Length; k++)
+                        {
+                            outbuf_sum = outbuf_sum + (int)outbuf[k];
+                        }
+
+                        outbuf_checksum[0] = (byte)(outbuf_sum & 0xFF);
+
+                        outbuf = outbuf.Concat(outbuf_checksum).ToArray();
+
+                        //出力配列書き込み
+                        serialPort1.Write(inbuf, 0, inbuf.Length);//エコーバック
+                        serialPort1.Write(outbuf, 0, outbuf.Length);
                     }
-                    outbuf_length[0] = (byte)outbuf_content.Length;
-
-                    //連結
-                    outbuf = outbuf.Concat(outbuf_header).ToArray();
-                    outbuf = outbuf.Concat(outbuf_length).ToArray();
-                    outbuf = outbuf.Concat(outbuf_content).ToArray();
-
-                    //チェックサム計算
-                    int outbuf_sum = 0;
-                    for (k = 0; k < outbuf.Length; k++)
-                    {
-                        outbuf_sum = outbuf_sum + (int)outbuf[k];
-                    }
-
-                    outbuf_checksum[0] = (byte)(outbuf_sum & 0xFF);
-
-                    outbuf = outbuf.Concat(outbuf_checksum).ToArray();
-
-                    //出力配列書き込み
-                    serialPort1.Write(inbuf, 0, inbuf.Length);//エコーバック
-                    serialPort1.Write(outbuf, 0, outbuf.Length);
                 }
             }
             catch (System.IO.IOException ex)
