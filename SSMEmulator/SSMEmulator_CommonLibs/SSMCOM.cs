@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Threading;
+using SSMEmulator.Common;
 
 namespace DefiSubaruMonitor
 {
@@ -21,6 +21,8 @@ namespace DefiSubaruMonitor
                 private bool _communicate_realtime_state1;
 
                 private SSM_Content_Table _content_table;
+
+                public event EventHandler<SSMCOMErrorEventArgs> SSMCOMErrorOccured;
 
                 //コンストラクタ
                 public SSMCOM()
@@ -52,7 +54,7 @@ namespace DefiSubaruMonitor
                         }
                         catch (System.InvalidOperationException ex1)
                         {
-                            MessageBox.Show(ex1.Message, "SSMCOMのエラー");
+                            SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMのエラー"));
                         }
                     }
                 }
@@ -171,15 +173,15 @@ namespace DefiSubaruMonitor
                     }
                     catch (System.IO.IOException ex)
                     {
-                        MessageBox.Show("SSMCOMポートが開けません");
+                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートが開けません"));
                     }
                     catch (System.InvalidOperationException ex)
                     {
-                        MessageBox.Show("SSMCOMポートはすでに開かれています。");
+                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートはすでに開かれています。"));
                     }
                     catch (System.UnauthorizedAccessException ex)
                     {
-                        MessageBox.Show("SSMCOMポートへのアクセスを拒否されました。");
+                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートへのアクセスを拒否されました。"));
                     }
                     finally
                     {
