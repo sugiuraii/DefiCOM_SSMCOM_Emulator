@@ -15,7 +15,7 @@ namespace DefiLinkEmulator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DefilinkEmulatorForm());
+            Application.Run(new DefilinkEmulator_WinForm());
         }
     }
 }

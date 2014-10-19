@@ -1,6 +1,6 @@
 ﻿namespace DefiLinkEmulator
 {
-    partial class DefilinkEmulatorForm
+    partial class DefilinkEmulator_WinForm
     {
         /// <summary>
         /// 必要なデザイナ変数です。
