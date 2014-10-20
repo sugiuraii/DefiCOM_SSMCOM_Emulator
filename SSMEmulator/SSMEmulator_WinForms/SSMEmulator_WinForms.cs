@@ -46,7 +46,7 @@ namespace SSMEmulator
             if (!_communicate_start)
             {
                 buttonStart.Text = "Stop";
-                ssmcomout1.PortName = (int)numericUpDown_Portname.Value;
+                ssmcomout1.PortName = comboBox_COMPortSelect.Text;
                 ssmcomout1.communicate_realtime_start();
                 _communicate_start = true;
             }

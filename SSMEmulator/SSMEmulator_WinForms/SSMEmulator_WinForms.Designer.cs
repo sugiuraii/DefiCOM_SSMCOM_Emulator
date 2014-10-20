@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.numericUpDown_Portname = new System.Windows.Forms.NumericUpDown();
             this.comboBox_Numeric = new System.Windows.Forms.ComboBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -45,7 +44,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox_switch = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Portname)).BeginInit();
+            this.comboBox_COMPortSelect = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -69,18 +68,6 @@
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
-            // 
-            // numericUpDown_Portname
-            // 
-            this.numericUpDown_Portname.Location = new System.Drawing.Point(108, 12);
-            this.numericUpDown_Portname.Name = "numericUpDown_Portname";
-            this.numericUpDown_Portname.Size = new System.Drawing.Size(92, 19);
-            this.numericUpDown_Portname.TabIndex = 21;
-            this.numericUpDown_Portname.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // comboBox_Numeric
             // 
@@ -221,13 +208,32 @@
             this.comboBox_switch.TabIndex = 30;
             this.comboBox_switch.SelectedIndexChanged += new System.EventHandler(this.comboBox_switch_SelectedIndexChanged);
             // 
+            // comboBox_COMPortSelect
+            // 
+            this.comboBox_COMPortSelect.FormattingEnabled = true;
+            this.comboBox_COMPortSelect.Items.AddRange(new object[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9"});
+            this.comboBox_COMPortSelect.Location = new System.Drawing.Point(100, 12);
+            this.comboBox_COMPortSelect.Name = "comboBox_COMPortSelect";
+            this.comboBox_COMPortSelect.Size = new System.Drawing.Size(123, 20);
+            this.comboBox_COMPortSelect.TabIndex = 26;
+            this.comboBox_COMPortSelect.Text = "COM1";
+            // 
             // SSMEmulatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 332);
+            this.ClientSize = new System.Drawing.Size(404, 331);
+            this.Controls.Add(this.comboBox_COMPortSelect);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.numericUpDown_Portname);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
@@ -236,9 +242,8 @@
             this.MinimumSize = new System.Drawing.Size(420, 370);
             this.Name = "SSMEmulatorForm";
             this.Text = "SSMEmulator";
-            this.Load += new System.EventHandler(this.SSMEmulatorForm_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DefilinkEmulatorForm_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Portname)).EndInit();
+            this.Load += new System.EventHandler(this.SSMEmulatorForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -253,7 +258,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.NumericUpDown numericUpDown_Portname;
         private System.Windows.Forms.ComboBox comboBox_Numeric;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -268,6 +272,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox_switch;
         private System.Windows.Forms.CheckBox checkBox_switch;
+        private System.Windows.Forms.ComboBox comboBox_COMPortSelect;
     }
 }
 

@@ -25,7 +25,7 @@ namespace SSMEmulator.Common
     public class SSMComOUT
     {
         private SerialPort serialPort1;
-        private Int32 _portname;
+        private String _portname;
         private Thread communicate_realtime_thread1;
         private bool _communicate_realtime_start;
 
@@ -39,7 +39,7 @@ namespace SSMEmulator.Common
         public SSMComOUT()
         {
             serialPort1 = new SerialPort();
-            PortName = 1;
+            PortName = "COM1";
             serialPort1.BaudRate = SSM_BAUD_RATE;
             serialPort1.ReadTimeout = 500;
 
@@ -99,7 +99,7 @@ namespace SSMEmulator.Common
             return _content_table[code].Value;
         }
 
-        public Int32 PortName
+        public String PortName
         {
             get
             {
@@ -110,11 +110,11 @@ namespace SSMEmulator.Common
                 try
                 {
                     _portname = value;
-                    serialPort1.PortName = "COM" + _portname;
+                    serialPort1.PortName = _portname;
                 }
                 catch (System.InvalidOperationException ex1)
                 {
-                    SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMのエラー"));
+                    SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs(ex1.Message));
                 }
             }
         }
@@ -254,7 +254,7 @@ namespace SSMEmulator.Common
                             }
                             else
                             {
-                                throw new InvalidOperationException("Content Tableのアドレス長が不正です");
+                                throw new InvalidOperationException("Invalid Content Table adress length.");
                             }
                         }
                     }
@@ -281,21 +281,25 @@ namespace SSMEmulator.Common
                     serialPort1.Write(outbuf, 0, outbuf.Length);
                 }
             }
+            catch (System.ArgumentException ex)
+            {
+                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs(ex.Message));
+            }
             catch (System.IO.IOException ex)
             {
-                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートが開けません"));
+                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs(ex.Message));
             }
             catch (System.InvalidOperationException ex)
             {
-                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートはすでに開かれています。"));
+                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs(ex.Message));
             }
             catch (System.UnauthorizedAccessException ex)
             {
-                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートへのアクセスを拒否されました。"));
+                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs(ex.Message));
             }
             catch (System.TimeoutException ex)
             {
-                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs("TimeoutException"));
+                SSMCOMOUTErrorOccured(this, new SSMCOMErrorEventArgs(ex.Message));
             }
             finally
             {

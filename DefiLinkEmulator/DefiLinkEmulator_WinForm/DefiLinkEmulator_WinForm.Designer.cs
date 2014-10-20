@@ -51,7 +51,7 @@
             this.label_ExtTemp = new System.Windows.Forms.Label();
             this.label_OilTemp = new System.Windows.Forms.Label();
             this.label_WaterTemp = new System.Windows.Forms.Label();
-            this.numericUpDown_Portname = new System.Windows.Forms.NumericUpDown();
+            this.comboBox_COMPortSelect = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Boost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Tacho)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_OilPres)).BeginInit();
@@ -59,7 +59,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_ExtTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_OilTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_WaterTemp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Portname)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -67,9 +66,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 12);
+            this.label1.Size = new System.Drawing.Size(84, 12);
             this.label1.TabIndex = 1;
-            this.label1.Text = "COMポート番号";
+            this.label1.Text = "COMPort Name";
             // 
             // trackBar_Boost
             // 
@@ -277,24 +276,31 @@
             this.label_WaterTemp.TabIndex = 20;
             this.label_WaterTemp.Text = "0";
             // 
-            // numericUpDown_Portname
+            // comboBox_COMPortSelect
             // 
-            this.numericUpDown_Portname.Location = new System.Drawing.Point(108, 12);
-            this.numericUpDown_Portname.Name = "numericUpDown_Portname";
-            this.numericUpDown_Portname.Size = new System.Drawing.Size(92, 19);
-            this.numericUpDown_Portname.TabIndex = 21;
-            this.numericUpDown_Portname.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.comboBox_COMPortSelect.FormattingEnabled = true;
+            this.comboBox_COMPortSelect.Items.AddRange(new object[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9"});
+            this.comboBox_COMPortSelect.Location = new System.Drawing.Point(100, 12);
+            this.comboBox_COMPortSelect.Name = "comboBox_COMPortSelect";
+            this.comboBox_COMPortSelect.Size = new System.Drawing.Size(121, 20);
+            this.comboBox_COMPortSelect.TabIndex = 22;
+            this.comboBox_COMPortSelect.Text = "COM1";
             // 
-            // DefilinkEmulatorForm
+            // DefilinkEmulator_WinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 336);
-            this.Controls.Add(this.numericUpDown_Portname);
+            this.ClientSize = new System.Drawing.Size(404, 331);
+            this.Controls.Add(this.comboBox_COMPortSelect);
             this.Controls.Add(this.label_WaterTemp);
             this.Controls.Add(this.label_OilTemp);
             this.Controls.Add(this.label_ExtTemp);
@@ -321,10 +327,10 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(420, 370);
             this.MinimumSize = new System.Drawing.Size(420, 370);
-            this.Name = "DefilinkEmulatorForm";
+            this.Name = "DefilinkEmulator_WinForm";
             this.Text = "DefiLinkEmulator";
-            this.Load += new System.EventHandler(this.DefilinkEmulatorForm_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DefilinkEmulatorForm_FormClosed);
+            this.Load += new System.EventHandler(this.DefilinkEmulatorForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Boost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Tacho)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_OilPres)).EndInit();
@@ -332,7 +338,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_ExtTemp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_OilTemp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_WaterTemp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Portname)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,7 +368,7 @@
         private System.Windows.Forms.Label label_ExtTemp;
         private System.Windows.Forms.Label label_OilTemp;
         private System.Windows.Forms.Label label_WaterTemp;
-        private System.Windows.Forms.NumericUpDown numericUpDown_Portname;
+        private System.Windows.Forms.ComboBox comboBox_COMPortSelect;
     }
 }
 

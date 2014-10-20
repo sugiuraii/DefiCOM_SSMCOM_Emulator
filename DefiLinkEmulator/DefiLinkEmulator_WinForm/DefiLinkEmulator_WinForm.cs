@@ -88,7 +88,7 @@ namespace DefiLinkEmulator
         {
             if (!_communicate_start)
             {
-                deficomout1.PortName = (int)numericUpDown_Portname.Value;
+                deficomout1.PortName = comboBox_COMPortSelect.Text;
                 deficomout1.communicate_realtime_start();
                 _communicate_start = true;
                 buttonStart.Text = "Stop";

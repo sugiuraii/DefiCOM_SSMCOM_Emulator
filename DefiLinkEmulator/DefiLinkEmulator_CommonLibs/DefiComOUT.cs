@@ -27,7 +27,7 @@ namespace DefiLinkEmulator
         public class DefiComOUT
         {
             private SerialPort serialPort1;
-            private Int32 _portname;
+            private String _portname;
             private Thread communicate_realtime_thread1;
             private bool _communicate_realtime_start;
 
@@ -48,7 +48,7 @@ namespace DefiLinkEmulator
             public DefiComOUT()
             {
                 serialPort1 = new SerialPort();
-                PortName = 1;
+                PortName = "COM1";
                 serialPort1.BaudRate = DEFI_BAUD_RATE;
                 serialPort1.Parity = Parity.Even;
                 serialPort1.ReadTimeout = 500;
@@ -123,7 +123,7 @@ namespace DefiLinkEmulator
                 }
             }
 
-            public Int32 PortName
+            public String PortName
             {
                 get
                 {
@@ -134,11 +134,11 @@ namespace DefiLinkEmulator
                     try
                     {
                         _portname = value;
-                        serialPort1.PortName = "COM" + _portname;
+                        serialPort1.PortName = _portname;
                     }
                     catch (System.InvalidOperationException ex)
                     {
-                        DefiCOMOUTErrorOccured(this,new DefiCOMOUTErrorEventArgs("DefiCOMのエラー"));
+                        DefiCOMOUTErrorOccured(this,new DefiCOMOUTErrorEventArgs(ex.Message));
                     }
                 }
             }
@@ -181,21 +181,25 @@ namespace DefiLinkEmulator
                         Thread.Sleep(14);
                     }
                 }
+                catch (System.ArgumentException ex)
+                {
+                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs(ex.Message));
+                }
                 catch (System.IO.IOException ex)
                 {
-                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs("DefiCOMポートが開けません"));
+                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs(ex.Message));
                 }
                 catch (System.InvalidOperationException ex)
                 {
-                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs("DefiCOMポートはすでに開かれています。"));
+                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs(ex.Message));
                 }
                 catch (System.UnauthorizedAccessException ex)
                 {
-                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs("DefiCOMポートへのアクセスを拒否されました。"));
+                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs(ex.Message));
                 }
                 catch (System.TimeoutException ex)
                 {
-                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs("TimeoutException"));
+                    DefiCOMOUTErrorOccured(this, new DefiCOMOUTErrorEventArgs(ex.Message));
                 }
                 finally
                 {
