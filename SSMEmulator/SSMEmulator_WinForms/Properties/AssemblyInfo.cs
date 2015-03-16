@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("DefiLinkEmulator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SSMEmulator")]
+[assembly: AssemblyDescription("SSM COMPort Emulator")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("sqm")]
-[assembly: AssemblyProduct("DefiLinkEmulator")]
-[assembly: AssemblyCopyright("Copyright © sqm 2010")]
+[assembly: AssemblyCompany("Kuniaki SUGIURA")]
+[assembly: AssemblyProduct("SSMEmulator")]
+[assembly: AssemblyCopyright("Copyright © Kuniaki SUGIURA 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
