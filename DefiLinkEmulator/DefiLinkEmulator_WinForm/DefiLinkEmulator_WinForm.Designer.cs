@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DefilinkEmulator_WinForm));
             this.label1 = new System.Windows.Forms.Label();
             this.trackBar_Boost = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
@@ -324,6 +325,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.trackBar_Boost);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(420, 370);
             this.MinimumSize = new System.Drawing.Size(420, 370);

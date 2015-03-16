@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("DefiLinkEmulator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("DefiLink COMPort Emulator")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("sqm")]
+[assembly: AssemblyCompany("Kuniaki SUGIURA")]
 [assembly: AssemblyProduct("DefiLinkEmulator")]
-[assembly: AssemblyCopyright("Copyright © sqm 2010")]
+[assembly: AssemblyCopyright("Copyright © Kuniaki SUGIURA 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
