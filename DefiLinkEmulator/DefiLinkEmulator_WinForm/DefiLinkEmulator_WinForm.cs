@@ -21,7 +21,7 @@ namespace DefiLinkEmulator
         {
             InitializeComponent();
             deficomout1 = new DefiComOUT();
-            deficomout1.DefiCOMOUTErrorOccured += deficomout1_DefiCOMOUTErrorOccured;
+            deficomout1.COMOUTErrorOccured += deficomout1_DefiCOMOUTErrorOccured;
             _communicate_start = false;
         }
         ~DefilinkEmulator_WinForm()
@@ -108,7 +108,7 @@ namespace DefiLinkEmulator
 
         
 
-        private void deficomout1_DefiCOMOUTErrorOccured(Object sender, DefiCOMOUTErrorEventArgs args)
+        private void deficomout1_DefiCOMOUTErrorOccured(Object sender, COMOUTErrorEventArgs args)
         {
             // UIとは別スレッドからの実行のため、Invokeメソッドを使ってスレッドセーフにする(通信スレッドからUIスレッドに委譲)
             // コントロールを生成したスレッドの場合 InvokeRequired は false となります。

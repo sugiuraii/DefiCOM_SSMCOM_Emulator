@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArduinoCOMOut.cs" />
+    <Compile Include="COMOutCommon.cs" />
     <Compile Include="DefiComOUT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
