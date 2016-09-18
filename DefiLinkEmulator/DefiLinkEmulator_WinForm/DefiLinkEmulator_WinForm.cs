@@ -14,14 +14,13 @@ namespace DefiLinkEmulator
     public partial class DefilinkEmulator_WinForm : Form
     {
         private DefiComOUT deficomout1;
-
-        bool _communicate_start;
+        private bool _communicate_start;
 
         public DefilinkEmulator_WinForm()
         {
             InitializeComponent();
             deficomout1 = new DefiComOUT();
-            deficomout1.COMOUTErrorOccured += deficomout1_DefiCOMOUTErrorOccured;
+            deficomout1.COMOUTErrorOccured += deficomout1_COMOUTErrorOccured;
             _communicate_start = false;
         }
         ~DefilinkEmulator_WinForm()
@@ -108,14 +107,14 @@ namespace DefiLinkEmulator
 
         
 
-        private void deficomout1_DefiCOMOUTErrorOccured(Object sender, COMOUTErrorEventArgs args)
+        private void deficomout1_COMOUTErrorOccured(Object sender, COMOUTErrorEventArgs args)
         {
             // UIとは別スレッドからの実行のため、Invokeメソッドを使ってスレッドセーフにする(通信スレッドからUIスレッドに委譲)
             // コントロールを生成したスレッドの場合 InvokeRequired は false となります。
             if (this.InvokeRequired)
             {
                 // コントロールを生成したスレッドに処理を委譲します。
-                this.Invoke((MethodInvoker)delegate() { deficomout1_DefiCOMOUTErrorOccured(sender, args); });
+                this.Invoke((MethodInvoker)delegate() { deficomout1_COMOUTErrorOccured(sender, args); });
                 return;
             }
 
