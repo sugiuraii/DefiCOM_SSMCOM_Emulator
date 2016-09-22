@@ -168,11 +168,11 @@
             // trackBar_Speed
             // 
             this.trackBar_Speed.Location = new System.Drawing.Point(74, 3);
-            this.trackBar_Speed.Maximum = 2464;
+            this.trackBar_Speed.Maximum = 1000000;
             this.trackBar_Speed.Name = "trackBar_Speed";
             this.trackBar_Speed.Size = new System.Drawing.Size(266, 28);
             this.trackBar_Speed.TabIndex = 14;
-            this.trackBar_Speed.TickFrequency = 200;
+            this.trackBar_Speed.TickFrequency = 100000;
             this.trackBar_Speed.ValueChanged += new System.EventHandler(this.trackBar_Speed_ValueChanged);
             // 
             // label_Speed
@@ -221,11 +221,11 @@
             // trackBar_Tacho
             // 
             this.trackBar_Tacho.Location = new System.Drawing.Point(74, 3);
-            this.trackBar_Tacho.Maximum = 2464;
+            this.trackBar_Tacho.Maximum = 1000000;
             this.trackBar_Tacho.Name = "trackBar_Tacho";
             this.trackBar_Tacho.Size = new System.Drawing.Size(266, 28);
             this.trackBar_Tacho.TabIndex = 4;
-            this.trackBar_Tacho.TickFrequency = 200;
+            this.trackBar_Tacho.TickFrequency = 100000;
             this.trackBar_Tacho.ValueChanged += new System.EventHandler(this.trackBar_Tacho_ValueChanged);
             // 
             // label_Tacho
@@ -299,7 +299,7 @@
             // trackBar_Boost
             // 
             this.trackBar_Boost.Location = new System.Drawing.Point(74, 3);
-            this.trackBar_Boost.Maximum = 2464;
+            this.trackBar_Boost.Maximum = 4095;
             this.trackBar_Boost.Name = "trackBar_Boost";
             this.trackBar_Boost.Size = new System.Drawing.Size(266, 28);
             this.trackBar_Boost.TabIndex = 2;
@@ -325,7 +325,7 @@
             // trackBar_WaterTemp
             // 
             this.trackBar_WaterTemp.Location = new System.Drawing.Point(74, 3);
-            this.trackBar_WaterTemp.Maximum = 2464;
+            this.trackBar_WaterTemp.Maximum = 4095;
             this.trackBar_WaterTemp.Name = "trackBar_WaterTemp";
             this.trackBar_WaterTemp.Size = new System.Drawing.Size(266, 28);
             this.trackBar_WaterTemp.TabIndex = 14;
@@ -378,7 +378,7 @@
             // trackBar_OilTemp
             // 
             this.trackBar_OilTemp.Location = new System.Drawing.Point(74, 3);
-            this.trackBar_OilTemp.Maximum = 2464;
+            this.trackBar_OilTemp.Maximum = 4095;
             this.trackBar_OilTemp.Name = "trackBar_OilTemp";
             this.trackBar_OilTemp.Size = new System.Drawing.Size(266, 28);
             this.trackBar_OilTemp.TabIndex = 12;
@@ -443,7 +443,7 @@
             // trackBar_OilTemp2
             // 
             this.trackBar_OilTemp2.Location = new System.Drawing.Point(74, 3);
-            this.trackBar_OilTemp2.Maximum = 2464;
+            this.trackBar_OilTemp2.Maximum = 4095;
             this.trackBar_OilTemp2.Name = "trackBar_OilTemp2";
             this.trackBar_OilTemp2.Size = new System.Drawing.Size(266, 28);
             this.trackBar_OilTemp2.TabIndex = 10;
@@ -495,7 +495,7 @@
             // trackBar_OilPres
             // 
             this.trackBar_OilPres.Location = new System.Drawing.Point(74, 3);
-            this.trackBar_OilPres.Maximum = 2464;
+            this.trackBar_OilPres.Maximum = 4095;
             this.trackBar_OilPres.Name = "trackBar_OilPres";
             this.trackBar_OilPres.Size = new System.Drawing.Size(266, 28);
             this.trackBar_OilPres.TabIndex = 6;
@@ -547,7 +547,7 @@
             // trackBar_FuelPres
             // 
             this.trackBar_FuelPres.Location = new System.Drawing.Point(74, 3);
-            this.trackBar_FuelPres.Maximum = 2464;
+            this.trackBar_FuelPres.Maximum = 4095;
             this.trackBar_FuelPres.Name = "trackBar_FuelPres";
             this.trackBar_FuelPres.Size = new System.Drawing.Size(266, 28);
             this.trackBar_FuelPres.TabIndex = 8;
