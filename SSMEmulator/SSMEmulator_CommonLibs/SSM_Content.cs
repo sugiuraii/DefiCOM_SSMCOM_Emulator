@@ -133,7 +133,7 @@ namespace DefiSubaruMonitor
                     _ssm_numeric_content_table.Add(SSM_Parameter_Code.Sub_Accelerator_Sensor, new SSM_Numeric_Content(new byte[] { 0x00, 0x01, 0x02 }, 0.02, 0.0, "V"));
                     _ssm_numeric_content_table.Add(SSM_Parameter_Code.Main_Accelerator_Sensor, new SSM_Numeric_Content(new byte[] { 0x00, 0x01, 0x03 }, 0.02, 0.0, "V"));
                     _ssm_numeric_content_table.Add(SSM_Parameter_Code.Brake_Booster_Pressure, new SSM_Numeric_Content(new byte[] { 0x00, 0x01, 0x04 }, 37.0 / 255.0, 0.0, "psig"));
-                    _ssm_numeric_content_table.Add(SSM_Parameter_Code.Fuel_Pressure_High, new SSM_Numeric_Content(new byte[] { 0x00, 0x01, 0x05 }, 0.04, 0.0, "MPa"));
+                    _ssm_numeric_content_table.Add(SSM_Parameter_Code.Fuel_Rail_Pressure, new SSM_Numeric_Content(new byte[] { 0x00, 0x01, 0x05 }, 0.04, 0.0, "MPa"));
                     _ssm_numeric_content_table.Add(SSM_Parameter_Code.Exhaust_Gas_Temperature, new SSM_Numeric_Content(new byte[] { 0x00, 0x01, 0x06 }, 5.0, 5.0 * 40.0, "C"));
                     _ssm_numeric_content_table.Add(SSM_Parameter_Code.Cold_Start_Injector, new SSM_Numeric_Content(new byte[] { 0x00, 0x01, 0x08 }, 0.256, 0.0, "ms"));
                     _ssm_numeric_content_table.Add(SSM_Parameter_Code.SCV_Step, new SSM_Numeric_Content(new byte[] { 0x00, 0x01, 0x09 }, 1.0, 0.0, "step"));
