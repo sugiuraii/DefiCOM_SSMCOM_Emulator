@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("DefiLinkEmulator")]
+[assembly: AssemblyTitle("SSMEmulator_CommonLibs")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("sqm")]
-[assembly: AssemblyProduct("DefiLinkEmulator")]
-[assembly: AssemblyCopyright("Copyright © sqm 2010")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SSMEmulator_CommonLibs")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 次の GUID は、このプロジェクトが COM に公開される場合の、typelib の ID です
-[assembly: Guid("6a37076c-a317-4b78-8981-25d63b07e10b")]
+[assembly: Guid("4371cb9d-b268-4025-9ca6-e8ccaec772b1")]
 
 // アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //
