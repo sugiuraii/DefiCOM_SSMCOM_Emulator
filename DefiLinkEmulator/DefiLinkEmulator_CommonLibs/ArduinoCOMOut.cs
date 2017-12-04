@@ -7,7 +7,7 @@ namespace DefiLinkEmulator.Common
     public class ArduinoCOMOut : COMOUTCommon
     {
         //Arduinoボーレート設定
-        public const int ARDUINO_BAUD_RATE = 9600;
+        public const int ARDUINO_BAUD_RATE = 38400;
 
         public ArduinoCOMOut()
             : base(ARDUINO_BAUD_RATE, Parity.None, 500, StopBits.One, 8)
