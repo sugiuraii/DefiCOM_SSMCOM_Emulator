@@ -9,7 +9,7 @@
 ![Diagram](Readme.img/EmulatorDiagram.jpg)
 
 ## Requirement
-* Windows with .net framework 4.
+* Windows with .Net Core SDK 3.1.
 * Virtual serial port emulator (such as [com0com](http://com0com.sourceforge.net/)), or serial cable.
 
 ## Install and launch
