@@ -54,7 +54,7 @@ namespace DefiSubaruMonitor
                         }
                         catch (System.InvalidOperationException ex1)
                         {
-                            SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMのエラー"));
+                            SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMのエラー"  + " : " + ex1.Message));
                         }
                     }
                 }
@@ -173,15 +173,15 @@ namespace DefiSubaruMonitor
                     }
                     catch (System.IO.IOException ex)
                     {
-                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートが開けません"));
+                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートが開けません" + " : " + ex.Message));
                     }
                     catch (System.InvalidOperationException ex)
                     {
-                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートはすでに開かれています。"));
+                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートはすでに開かれています。" + " : " + ex.Message));
                     }
                     catch (System.UnauthorizedAccessException ex)
                     {
-                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートへのアクセスを拒否されました。"));
+                        SSMCOMErrorOccured(this, new SSMCOMErrorEventArgs("SSMCOMポートへのアクセスを拒否されました。" + " : " + ex.Message));
                     }
                     finally
                     {
@@ -234,6 +234,7 @@ namespace DefiSubaruMonitor
                     }
                     catch (TimeoutException ex)
                     {
+                        Console.WriteLine("Timeout occured. "  + " : " + ex.Message);
                     }
                 }
 
