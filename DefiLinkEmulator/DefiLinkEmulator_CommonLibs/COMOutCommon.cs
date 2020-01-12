@@ -22,7 +22,8 @@ namespace DefiLinkEmulator.Common
         private SerialPort serialPort1;
         private Thread communicate_realtime_thread1;
         private bool _communicate_realtime_start;
-
+        
+        private CommunicationThreadEndStatus communicationThreadEndStatus;
         public event EventHandler<COMOUTErrorEventArgs> COMOUTErrorOccured;
 
         public bool IsCommunicateRunning
@@ -33,16 +34,18 @@ namespace DefiLinkEmulator.Common
             }
         }
 
+        public CommunicationThreadEndStatus WaitCommunicationThreadEnd()
+        {
+            while(_communicate_realtime_start)
+                Thread.Sleep(100);
+
+            return communicationThreadEndStatus;
+        }
+
         public COMOUTCommon(int baudrate, Parity parity, int readTimeout, StopBits stopBits, int dataBits)
         {
             serialPort1 = new SerialPort();
             PortName = "COM1";
-            serialPort1.BaudRate = baudrate;
-            serialPort1.Parity = parity;
-            serialPort1.ReadTimeout = readTimeout;
-            serialPort1.StopBits = stopBits;
-            serialPort1.DataBits = dataBits;
-
             _communicate_realtime_start = false;
         }
         
@@ -92,25 +95,11 @@ namespace DefiLinkEmulator.Common
                 {
                     communicate_main();
                 }
+                communicationThreadEndStatus = new CommunicationThreadEndStatus(false, null);
             }
-            catch (System.ArgumentException ex)
+            catch (Exception ex)
             {
-                COMOUTErrorOccured(this, new COMOUTErrorEventArgs(ex.Message));
-            }
-            catch (System.IO.IOException ex)
-            {
-                COMOUTErrorOccured(this, new COMOUTErrorEventArgs(ex.Message));
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                COMOUTErrorOccured(this, new COMOUTErrorEventArgs(ex.Message));
-            }
-            catch (System.UnauthorizedAccessException ex)
-            {
-                COMOUTErrorOccured(this, new COMOUTErrorEventArgs(ex.Message));
-            }
-            catch (System.TimeoutException ex)
-            {
+                communicationThreadEndStatus = new CommunicationThreadEndStatus(true, ex);
                 COMOUTErrorOccured(this, new COMOUTErrorEventArgs(ex.Message));
             }
             finally

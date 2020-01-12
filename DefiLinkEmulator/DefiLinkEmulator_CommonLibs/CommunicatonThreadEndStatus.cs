@@ -4,7 +4,7 @@ namespace DefiLinkEmulator.Common
 {
     public class CommunicationThreadEndStatus
     {
-        public readonly boolean IsErrorOccured;
+        public readonly bool IsErrorOccured;
         public readonly Exception Exception;
 
         public CommunicationThreadEndStatus(bool isErrorOccured, Exception exception)
