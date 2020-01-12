@@ -46,6 +46,12 @@ namespace DefiLinkEmulator.Common
         {
             serialPort1 = new SerialPort();
             PortName = "COM1";
+            serialPort1.BaudRate = baudrate;
+            serialPort1.Parity = parity;
+            serialPort1.ReadTimeout = readTimeout;
+            serialPort1.StopBits = stopBits;
+            serialPort1.DataBits = dataBits;
+
             _communicate_realtime_start = false;
         }
         
