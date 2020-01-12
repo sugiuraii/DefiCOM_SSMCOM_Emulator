@@ -25,6 +25,14 @@ namespace DefiLinkEmulator.Common
 
         public event EventHandler<COMOUTErrorEventArgs> COMOUTErrorOccured;
 
+        public bool IsCommunicateRunning
+        {
+            get
+            {   
+                return _communicate_realtime_start;
+            }
+        }
+
         public COMOUTCommon(int baudrate, Parity parity, int readTimeout, StopBits stopBits, int dataBits)
         {
             serialPort1 = new SerialPort();
