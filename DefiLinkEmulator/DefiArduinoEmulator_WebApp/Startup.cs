@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DefiArduinoEmulator_WebApp.Hubs;
+using DefiArduinoEmulator_WebApp.Services;
 
 namespace DefiArduinoEmulator_WebApp {
     public class Startup {
@@ -15,6 +16,7 @@ namespace DefiArduinoEmulator_WebApp {
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices (IServiceCollection services) {
             services.AddSignalR ();
+            services.AddSingleton<DefiLinkEmulatorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
