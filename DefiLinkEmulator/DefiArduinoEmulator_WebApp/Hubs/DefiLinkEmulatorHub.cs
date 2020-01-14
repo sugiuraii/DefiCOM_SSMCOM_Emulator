@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace DefiArduinoEmulator_WebApp.Hubs
 {
-    public class ChatHub : Hub
+    public class DefiLinkEmulatorHub : Hub
     {
         public async Task NewMessage(long username, string message)
         {
