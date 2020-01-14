@@ -30,7 +30,7 @@ namespace DefiArduinoEmulator_WebApp {
             app.UseStaticFiles ();
 
             app.UseEndpoints (endpoints => {
-                endpoints.MapHub<ChatHub> ("/hub");
+                endpoints.MapHub<DefiLinkEmulatorHub> ("/hub");
             });
         }
     }

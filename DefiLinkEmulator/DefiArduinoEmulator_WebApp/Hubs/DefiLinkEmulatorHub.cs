@@ -12,6 +12,13 @@ namespace DefiArduinoEmulator_WebApp.Hubs
         {
             _defilinkEmulatorService = defiLinkEmulatorService;
         }
+
+        public async Task SetCOMPort(string portname)
+        {
+            _defilinkEmulatorService.DefiComOUT.PortName = portname;
+            await Clients.All.SendAsync("comportNameChanged", portname);
+        }
+
         public async Task NewMessage(long username, string message)
         {
             await Clients.All.SendAsync("messageReceived", username, message);

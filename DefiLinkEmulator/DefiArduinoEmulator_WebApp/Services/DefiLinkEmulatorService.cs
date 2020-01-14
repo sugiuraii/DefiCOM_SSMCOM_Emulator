@@ -9,7 +9,7 @@ namespace DefiArduinoEmulator_WebApp.Services
     {
         private readonly IHubContext<DefiLinkEmulatorHub> _hubContext;
         private readonly DefiComOUT _defiComOUT = new DefiComOUT();
-        public DefiLinkEmulatorService(IHubContext<DefiLinkEmulatorService> hubContext)
+        public DefiLinkEmulatorService(IHubContext<DefiLinkEmulatorHub> hubContext)
         {
             _hubContext = hubContext;
         }
