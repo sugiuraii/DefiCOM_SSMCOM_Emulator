@@ -16,6 +16,7 @@ namespace DefiArduinoEmulator_WebApp {
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices (IServiceCollection services) {
             services.AddSignalR ();
+            services.AddControllers();
             services.AddSingleton<DefiLinkEmulatorService>();
         }
 
@@ -31,6 +32,9 @@ namespace DefiArduinoEmulator_WebApp {
 
             app.UseEndpoints (endpoints => {
                 endpoints.MapHub<DefiLinkEmulatorHub> ("/hub");
+                endpoints.MapControllerRoute(
+                    name: "defi",
+                    pattern: "{controller}/{action}/{id?}");
             });
         }
     }

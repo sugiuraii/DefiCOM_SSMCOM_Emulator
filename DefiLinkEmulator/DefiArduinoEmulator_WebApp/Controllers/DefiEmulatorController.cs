@@ -1,28 +1,22 @@
-using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
+using System;
 using DefiArduinoEmulator_WebApp.Services;
 using DefiArduinoEmulator_WebApp.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DefiArduinoEmulator_WebApp.Hubs
+namespace DefiArduinoEmulator_WebApp.Controllers
 {
-    public class DefiLinkEmulatorHub : Hub
+    public class DefiEmulatorController : Controller
     {
         private readonly DefiLinkEmulatorService _defilinkEmulatorService;
 
-        public DefiLinkEmulatorHub(DefiLinkEmulatorService defiLinkEmulatorService) : base()
+        public DefiEmulatorController(DefiLinkEmulatorService defiLinkEmulatorService) : base()
         {
             _defilinkEmulatorService = defiLinkEmulatorService;
         }
 
-        public void StartDefiEmulator(string comPortName)
+        public ActionResult  EmulatorStatus()
         {
-            _defilinkEmulatorService.DefiComOUT.PortName = comPortName;
-            _defilinkEmulatorService.DefiComOUT.communicate_realtime_start();
-        }
-
-        public async Task GetEmulatorStatus()
-        {
-            var appStatus = new DefiCOMEmulatorStatus();
+            DefiCOMEmulatorStatus appStatus = new DefiCOMEmulatorStatus();
             var defiCOMOut = _defilinkEmulatorService.DefiComOUT;
             appStatus.COMPortName = defiCOMOut.PortName;
             appStatus.IsRunning = defiCOMOut.IsCommunicateRunning;
@@ -33,13 +27,7 @@ namespace DefiArduinoEmulator_WebApp.Hubs
             appStatus.DefiCOMParameter.Add(DefiParameterCode.Manifold_Absolute_Pressure.ToString(), defiCOMOut.Boost);
             appStatus.DefiCOMParameter.Add(DefiParameterCode.Oil_Pressure.ToString(), defiCOMOut.Oil_Pres);
             appStatus.DefiCOMParameter.Add(DefiParameterCode.Oil_Temperature.ToString(), defiCOMOut.Oil_Temp);
-
-            await Clients.Caller.SendAsync("appStatus", appStatus);
-        }
-
-        public async Task NewMessage(long username, string message)
-        {
-            await Clients.All.SendAsync("messageReceived", username, message);
+            return Json(appStatus);
         }
     }
 }
