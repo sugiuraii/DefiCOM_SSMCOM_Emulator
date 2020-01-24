@@ -25,6 +25,7 @@ module.exports = {
             }
         ]
     },
+    devtool: 'inline-source-map',
     plugins: [
         new CleanWebpackPlugin(["wwwroot/*"]),
         new HtmlWebpackPlugin({
