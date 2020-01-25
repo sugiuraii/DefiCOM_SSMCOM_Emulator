@@ -1,6 +1,23 @@
 import "./css/main.css";
 import * as signalR from "@microsoft/signalr";
+import * as $ from 'jquery';
+import {DefiCOMEmulatorStatus} from './model/DefiCOMEmulatorStatus';
 
+const startButton : HTMLButtonElement = document.querySelector("#btnStart");
+const comPortInput : HTMLInputElement = document.querySelector("#comportNameInput");
+const boostSlider : HTMLInputElement = document.querySelector("#boostSlider");
+const boostLabel : HTMLLabelElement = document.querySelector("#boostLabel"); 
+
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/hub")
+    .build();
+
+$(document).ready( () => {
+    const emuStatus = $.getJSON('./DefiEmulator/EmulatorStatus');
+    console.log(emuStatus.responseJSON);
+});
+
+/*
 const divMessages: HTMLDivElement = document.querySelector("#divMessages");
 const tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
 const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
@@ -34,3 +51,4 @@ function send() {
     connection.send("newMessage", username, tbMessage.value)
               .then(() => tbMessage.value = "");
 }
+*/
