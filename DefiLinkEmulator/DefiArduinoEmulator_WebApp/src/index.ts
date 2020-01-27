@@ -9,6 +9,46 @@ const connection = new signalR.HubConnectionBuilder()
 
 window.onload = function()
 {
+    connection.on("parameterUpdated", (code:string, value:number) =>
+    {
+        switch(code)
+        {
+            case "Manifold_Absolute_Pressure":
+                $('#boostSlider').prop('value', value);
+                $('#boostLabel').text(value);
+                break;
+            case "Engine_Speed":
+                $('#rpmSlider').prop('value', value);
+                $('#rpmLabel').text(value);
+                break;
+            case "Oil_Pressure":
+                $('#oilpresSlider').prop('value', value);
+                $('#oilpresLabel').text(value);
+                break;
+            case "Fuel_Rail_Pressure":
+                $('#fuelpresSlider').prop('value', value);
+                $('#fuelpresLabel').text(value);
+                break;
+            case "Exhaust_Gas_Temperature":
+                $('#exttempSlider').prop('value', value);
+                $('#exttempLabel').text(value);
+                break;
+            case "Oil_Temperature":
+                $('#oiltempSlider').prop('value', value);
+                $('#oiltempLabel').text(value);
+                break;
+            case "Coolant_Temperature":
+                $('#watertempSlider').prop('value', value);
+                $('#watertempLabel').text(value);
+                break;
+            default:
+                throw Error("Parameter code does not match on parameterUpdated.");
+        }
+    });
+
+    connection.start().catch(err => {throw Error(err)});
+    $('#boostSlider').on('input', () => connection.send("updateParameter", "Manifold_Absolute_Pressure", $('#boostSlider').val()).then(()=>{}));
+
     $.getJSON('DefiEmulator/EmulatorStatus/', null, (emuStatus : DefiCOMEmulatorStatus) =>
     {
         setEmustatus(emuStatus);
@@ -40,7 +80,6 @@ function setEmustatus(emuStatus : DefiCOMEmulatorStatus)
     
     $('#watertempSlider').prop('value', emuStatus.defiCOMParameter["Coolant_Temperature"]);
     $('#watertempLabel').text(emuStatus.defiCOMParameter["Coolant_Temperature"]);
-    
 }
 
 /*

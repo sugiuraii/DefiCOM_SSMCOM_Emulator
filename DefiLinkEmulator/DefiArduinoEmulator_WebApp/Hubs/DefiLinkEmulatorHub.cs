@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using DefiArduinoEmulator_WebApp.Services;
 using DefiArduinoEmulator_WebApp.Models;
+using System;
 
 namespace DefiArduinoEmulator_WebApp.Hubs
 {
@@ -35,6 +36,46 @@ namespace DefiArduinoEmulator_WebApp.Hubs
             appStatus.DefiCOMParameter.Add(DefiParameterCode.Oil_Temperature.ToString(), defiCOMOut.Oil_Temp);
 
             await Clients.Caller.SendAsync("appStatus", appStatus);
+        }
+
+        public async Task UpdateParameter(string code, int val)
+        {
+            Console.WriteLine(code + " " + val.ToString());
+
+            var defiCOMOut = _defilinkEmulatorService.DefiComOUT;            
+            switch(code)
+            {
+                case "Manifold_Absolute_Pressure":
+                    defiCOMOut.Boost = val;
+                    await Clients.All.SendAsync("parameterUpdated", code, val);
+                    break;
+                case "Engine_Speed":
+                    defiCOMOut.Tacho = val;
+                    await Clients.All.SendAsync("parameterUpdated", code, val);
+                    break;
+                case "Oil_Pressure":
+                    defiCOMOut.Oil_Pres = val;
+                    await Clients.All.SendAsync("parameterUpdated", code, val);
+                    break;
+                case "Fuel_Rail_Pressure":
+                    defiCOMOut.Fuel_Pres = val;
+                    await Clients.All.SendAsync("parameterUpdated", code, val);
+                    break;
+                case "Exhaust_Gas_Temperature":
+                    defiCOMOut.Ext_Temp = val;
+                    await Clients.All.SendAsync("parameterUpdated", code, val);
+                    break;
+                case "Oil_Temperature":
+                    defiCOMOut.Oil_Temp = val;
+                    await Clients.All.SendAsync("parameterUpdated", code, val);
+                    break;
+                case "Coolant_Temperature":
+                    defiCOMOut.Water_Temp = val;
+                    await Clients.All.SendAsync("parameterUpdated", code, val);
+                    break;
+                default:
+                    throw new ArgumentException("Parameter code does not match on parameterUpdated.");
+            }
         }
 
         public async Task NewMessage(long username, string message)
