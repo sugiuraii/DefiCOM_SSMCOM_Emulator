@@ -47,7 +47,13 @@ window.onload = function()
     });
 
     connection.start().catch(err => {throw Error(err)});
-    $('#boostSlider').on('input', () => connection.send("updateParameter", "Manifold_Absolute_Pressure", $('#boostSlider').val()).then(()=>{}));
+    $('#boostSlider').on('input', () => connection.send("updateParameter", "Manifold_Absolute_Pressure", $('#boostSlider').val()));
+    $('#rpmSlider').on('input', () => connection.send("updateParameter", "Engine_Speed", $('#rpmSlider').val()));
+    $('#oilpresSlider').on('input', () => connection.send("updateParameter", "Oil_Pressure", $('#oilpresSlider').val()));
+    $('#fuelpresSlider').on('input', () => connection.send("updateParameter", "Fuel_Rail_Pressure", $('#fuelpresSlider').val()));
+    $('#exttempSlider').on('input', () => connection.send("updateParameter", "Exhaust_Gas_Temperature", $('#exttempSlider').val()));
+    $('#oiltempSlider').on('input', () => connection.send("updateParameter", "Oil_Temperature", $('#oiltempSlider').val()));
+    $('#watertempSlider').on('input', () => connection.send("updateParameter", "Coolant_Temperature", $('#watertempSlider').val()));
 
     $.getJSON('DefiEmulator/EmulatorStatus/', null, (emuStatus : DefiCOMEmulatorStatus) =>
     {
@@ -81,39 +87,3 @@ function setEmustatus(emuStatus : DefiCOMEmulatorStatus)
     $('#watertempSlider').prop('value', emuStatus.defiCOMParameter["Coolant_Temperature"]);
     $('#watertempLabel').text(emuStatus.defiCOMParameter["Coolant_Temperature"]);
 }
-
-/*
-const divMessages: HTMLDivElement = document.querySelector("#divMessages");
-const tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
-const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
-const username = new Date().getTime();
-
-const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/hub")
-    .build();
-
-connection.on("messageReceived", (username: string, message: string) => {
-    let messageContainer = document.createElement("div");
-
-    messageContainer.innerHTML =
-        `<div class="message-author">${username}</div><div>${message}</div>`;
-
-    divMessages.appendChild(messageContainer);
-    divMessages.scrollTop = divMessages.scrollHeight;
-});
-
-connection.start().catch(err => document.write(err));
-
-tbMessage.addEventListener("keyup", (e: KeyboardEvent) => {
-    if (e.keyCode === 13) {
-        send();
-    }
-});
-
-btnSend.addEventListener("click", send);
-
-function send() {
-    connection.send("newMessage", username, tbMessage.value)
-              .then(() => tbMessage.value = "");
-}
-*/

@@ -38,9 +38,9 @@ namespace DefiArduinoEmulator_WebApp.Hubs
             await Clients.Caller.SendAsync("appStatus", appStatus);
         }
 
-        public async Task UpdateParameter(string code, int val)
+        public async Task UpdateParameter(string code, string valStr)
         {
-            Console.WriteLine(code + " " + val.ToString());
+            var val = Int32.Parse(valStr);
 
             var defiCOMOut = _defilinkEmulatorService.DefiComOUT;            
             switch(code)
