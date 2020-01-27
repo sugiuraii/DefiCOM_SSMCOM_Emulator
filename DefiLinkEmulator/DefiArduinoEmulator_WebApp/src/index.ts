@@ -3,19 +3,47 @@ import * as signalR from "@microsoft/signalr";
 import * as $ from 'jquery';
 import {DefiCOMEmulatorStatus} from './model/DefiCOMEmulatorStatus';
 
-const startButton : HTMLButtonElement = document.querySelector("#btnStart");
-const comPortInput : HTMLInputElement = document.querySelector("#comportNameInput");
-const boostSlider : HTMLInputElement = document.querySelector("#boostSlider");
-const boostLabel : HTMLLabelElement = document.querySelector("#boostLabel"); 
-
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
     .build();
 
-$(document).ready( () => {
-    const emuStatus = $.getJSON('./DefiEmulator/EmulatorStatus');
-    console.log(emuStatus.responseJSON);
-});
+window.onload = function()
+{
+    $.getJSON('DefiEmulator/EmulatorStatus/', null, (emuStatus : DefiCOMEmulatorStatus) =>
+    {
+        setEmustatus(emuStatus);
+    });
+};
+
+function setEmustatus(emuStatus : DefiCOMEmulatorStatus)
+{
+    $('#boostLabel').text("100");
+
+    $('#btnStart').prop('disabled', !emuStatus.isRunning);
+    $('#comportNameInput').prop('value', emuStatus.comPortName);
+
+    $('#boostSlider').prop('value', emuStatus.defiCOMParameter["Manifold_Absolute_Pressure"]);
+    $('#boostLabel').text(emuStatus.defiCOMParameter["Manifold_Absolute_Pressure"]);
+    
+    $('#rpmSlider').prop('value', emuStatus.defiCOMParameter["Engine_Speed"]);
+    $('#rpmLabel').text(emuStatus.defiCOMParameter["Engine_Speed"]);
+    
+    $('#oilpresSlider').prop('value', emuStatus.defiCOMParameter["Oil_Pressure"]);
+    $('#oilpresLabel').text(emuStatus.defiCOMParameter["Oil_Pressure"]);
+    
+    $('#fuelpresSlider').prop('value', emuStatus.defiCOMParameter["Fuel_Rail_Pressure"]);
+    $('#fuelpresLabel').text(emuStatus.defiCOMParameter["Fuel_Rail_Pressure"]);
+    
+    $('#exttempSlider').prop('value', emuStatus.defiCOMParameter["Exhaust_Gas_Temperature"]);
+    $('#exttempLabel').text(emuStatus.defiCOMParameter["Exhaust_Gas_Temperature"]);
+    
+    $('#oiltempSlider').prop('value', emuStatus.defiCOMParameter["Oil_Temperature"]);
+    $('#oiltempLabel').text(emuStatus.defiCOMParameter["Oil_Temperature"]);
+    
+    $('#watertempSlider').prop('value', emuStatus.defiCOMParameter["Coolant_Temperature"]);
+    $('#watertempLabel').text(emuStatus.defiCOMParameter["Coolant_Temperature"]);
+    
+}
 
 /*
 const divMessages: HTMLDivElement = document.querySelector("#divMessages");
