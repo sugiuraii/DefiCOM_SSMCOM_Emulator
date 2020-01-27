@@ -17,8 +17,6 @@ window.onload = function()
 
 function setEmustatus(emuStatus : DefiCOMEmulatorStatus)
 {
-    $('#boostLabel').text("100");
-
     $('#btnStart').prop('disabled', !emuStatus.isRunning);
     $('#comportNameInput').prop('value', emuStatus.comPortName);
 
