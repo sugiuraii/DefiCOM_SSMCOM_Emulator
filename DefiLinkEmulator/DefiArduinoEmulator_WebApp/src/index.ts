@@ -46,6 +46,16 @@ window.onload = function()
         }
     });
 
+    connection.on("emulatorStartStopped", (comportName:string, isrunning:boolean, iserror:boolean, alertmessage:string) =>
+    {
+        $('#comportNameInput').val(comportName);
+        $('#btnStart').prop('disabled', !isrunning);
+        if(iserror)
+        {
+            alert(alertmessage);
+        }
+    });
+
     connection.start().catch(err => {throw Error(err)});
     $('#boostSlider').on('input', () => connection.send("updateParameter", "Manifold_Absolute_Pressure", $('#boostSlider').val()));
     $('#rpmSlider').on('input', () => connection.send("updateParameter", "Engine_Speed", $('#rpmSlider').val()));
@@ -54,7 +64,7 @@ window.onload = function()
     $('#exttempSlider').on('input', () => connection.send("updateParameter", "Exhaust_Gas_Temperature", $('#exttempSlider').val()));
     $('#oiltempSlider').on('input', () => connection.send("updateParameter", "Oil_Temperature", $('#oiltempSlider').val()));
     $('#watertempSlider').on('input', () => connection.send("updateParameter", "Coolant_Temperature", $('#watertempSlider').val()));
-
+ 
     $.getJSON('DefiEmulator/EmulatorStatus/', null, (emuStatus : DefiCOMEmulatorStatus) =>
     {
         setEmustatus(emuStatus);
