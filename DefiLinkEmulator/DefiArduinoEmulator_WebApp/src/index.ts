@@ -69,6 +69,8 @@ window.onload = function()
     {
         setEmustatus(emuStatus);
     });
+
+    $('#btnStart').on('click', ()=> connection.send("startDefiEmulator", $('#comportNameInput').val()));
 };
 
 function setEmustatus(emuStatus : DefiCOMEmulatorStatus)
