@@ -19,7 +19,7 @@ namespace DefiArduinoEmulator_WebApp.Hubs
         {
             _defilinkEmulatorService.DefiComOUT.PortName = comPortName;
             _defilinkEmulatorService.DefiComOUT.COMOUTErrorOccured += async (obj, arg) =>
-                await Clients.All.SendAsync("emulatorStartStopped", comPortName, false, true, arg.Message);
+                await _defilinkEmulatorService.HubContext.Clients.All.SendAsync("emulatorStartStopped", comPortName, false, true, arg.Message);
             _defilinkEmulatorService.DefiComOUT.communicate_realtime_start();
             await Clients.All.SendAsync("emulatorStartStopped", comPortName, true, false, "");
         }

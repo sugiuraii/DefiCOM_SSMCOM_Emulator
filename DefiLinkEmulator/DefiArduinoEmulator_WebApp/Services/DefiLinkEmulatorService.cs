@@ -14,6 +14,8 @@ namespace DefiArduinoEmulator_WebApp.Services
             _hubContext = hubContext;
         }
 
+        public IHubContext<DefiLinkEmulatorHub> HubContext { get { return _hubContext;} }
+
         public DefiComOUT DefiComOUT{ get => _defiComOUT; }
     }
 }
