@@ -25,6 +25,13 @@ namespace DefiArduinoEmulator_WebApp.Hubs
             await Clients.All.SendAsync("emulatorStartStopped", comPortName, true, false, "");
         }
 
+        public async Task StopDefiEmulator()
+        {
+            _defilinkEmulatorService.DefiComOUT.communicate_realtime_stop();
+            string comPortName = _defilinkEmulatorService.DefiComOUT.PortName;
+            await Clients.All.SendAsync("emulatorStartStopped", comPortName, false, false, "");
+        }
+
         public async Task GetEmulatorStatus()
         {
             var appStatus = new DefiCOMEmulatorStatus();
