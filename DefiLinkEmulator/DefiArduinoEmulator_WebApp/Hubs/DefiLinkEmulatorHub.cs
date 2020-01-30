@@ -13,13 +13,14 @@ namespace DefiArduinoEmulator_WebApp.Hubs
         public DefiLinkEmulatorHub(DefiLinkEmulatorService defiLinkEmulatorService) : base()
         {
             _defilinkEmulatorService = defiLinkEmulatorService;
+            _defilinkEmulatorService.DefiComOUT.COMOUTErrorOccured += async (obj, arg) =>
+                await _defilinkEmulatorService.HubContext.Clients.All.SendAsync("emulatorStartStopped", _defilinkEmulatorService.DefiComOUT.PortName, false, true, arg.Message);        
         }
 
         public async Task StartDefiEmulator(string comPortName)
         {
             _defilinkEmulatorService.DefiComOUT.PortName = comPortName;
-            _defilinkEmulatorService.DefiComOUT.COMOUTErrorOccured += async (obj, arg) =>
-                await _defilinkEmulatorService.HubContext.Clients.All.SendAsync("emulatorStartStopped", comPortName, false, true, arg.Message);
+
             _defilinkEmulatorService.DefiComOUT.communicate_realtime_start();
             await Clients.All.SendAsync("emulatorStartStopped", comPortName, true, false, "");
         }
