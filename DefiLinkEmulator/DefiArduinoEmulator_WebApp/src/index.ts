@@ -49,7 +49,7 @@ window.onload = function()
     connection.on("emulatorStartStopped", (comportName:string, isrunning:boolean, iserror:boolean, alertmessage:string) =>
     {
         $('#comportNameInput').val(comportName);
-        $('#btnStart').prop('disabled', !isrunning);
+        $('#btnStart').prop('disabled', isrunning);
         if(iserror)
         {
             alert(alertmessage);
@@ -75,7 +75,7 @@ window.onload = function()
 
 function setEmustatus(emuStatus : DefiCOMEmulatorStatus)
 {
-    $('#btnStart').prop('disabled', !emuStatus.isRunning);
+    $('#btnStart').prop('disabled', emuStatus.isRunning);
     $('#comportNameInput').prop('value', emuStatus.comPortName);
 
     $('#boostSlider').prop('value', emuStatus.defiCOMParameter["Manifold_Absolute_Pressure"]);
