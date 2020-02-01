@@ -50,6 +50,7 @@ window.onload = function()
     {
         $('#comportNameInput').val(comportName);
         $('#btnStart').prop('disabled', isrunning);
+        $('#btnStop').prop('disabled', !isrunning);
         if(iserror)
         {
             alert(alertmessage);
@@ -71,11 +72,14 @@ window.onload = function()
     });
 
     $('#btnStart').on('click', ()=> connection.send("startDefiEmulator", $('#comportNameInput').val()));
+    $('#btnStop').on('click', ()=> connection.send("stopDefiEmulator"));
 };
 
 function setEmustatus(emuStatus : DefiCOMEmulatorStatus)
 {
     $('#btnStart').prop('disabled', emuStatus.isRunning);
+    $('#btnStop').prop('disabled', !emuStatus.isRunning);
+
     $('#comportNameInput').prop('value', emuStatus.comPortName);
 
     $('#boostSlider').prop('value', emuStatus.defiCOMParameter["Manifold_Absolute_Pressure"]);
