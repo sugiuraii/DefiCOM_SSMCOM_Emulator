@@ -61,11 +61,14 @@ namespace DefiLinkEmulator_GtkSharp
             defiComOut.COMOUTErrorOccured += (sender, args) => 
             {
                 var senderobj = (DefiComOUT)sender;
-                communicate_start = false;
-                startButton.Label = "Start";
-                var md = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, args.Message);
-                md.Show();
-                md.Dispose();
+                Gtk.Application.Invoke( (s, e) =>
+                { 
+                    communicate_start = false;
+                    startButton.Label = "Start";
+                    var md = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, args.Message);
+                    md.Show();
+                    md.Dispose();
+                });
             };
         }
     }
