@@ -2,7 +2,37 @@
 <!-- Generated with glade 3.36.0 -->
 <interface>
   <requires lib="gtk+" version="3.18"/>
-  <object class="GtkAdjustment" id="defiLinkValAdjustment">
+  <object class="GtkAdjustment" id="boostAdjustment">
+    <property name="upper">2464</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="engRevAdjustment">
+    <property name="upper">2464</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="extTempAdjustment">
+    <property name="upper">2464</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="fuelPresAdjustment">
+    <property name="upper">2464</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="oilPresAdjustment">
+    <property name="upper">2464</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="oilTempAdjustment">
+    <property name="upper">2464</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="waterTempAdjustment">
     <property name="upper">2464</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
@@ -73,7 +103,7 @@
               <object class="GtkScale" id="boostScale">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="adjustment">defiLinkValAdjustment</property>
+                <property name="adjustment">boostAdjustment</property>
                 <property name="round_digits">0</property>
                 <property name="digits">0</property>
                 <property name="value_pos">right</property>
@@ -111,7 +141,7 @@
               <object class="GtkScale" id="engRevScale">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="adjustment">defiLinkValAdjustment</property>
+                <property name="adjustment">engRevAdjustment</property>
                 <property name="round_digits">0</property>
                 <property name="digits">0</property>
                 <property name="value_pos">right</property>
@@ -149,7 +179,7 @@
               <object class="GtkScale" id="oilPresScale">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="adjustment">defiLinkValAdjustment</property>
+                <property name="adjustment">oilPresAdjustment</property>
                 <property name="round_digits">0</property>
                 <property name="digits">0</property>
                 <property name="value_pos">right</property>
@@ -187,7 +217,7 @@
               <object class="GtkScale" id="fuelPresScale">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="adjustment">defiLinkValAdjustment</property>
+                <property name="adjustment">fuelPresAdjustment</property>
                 <property name="round_digits">0</property>
                 <property name="digits">0</property>
                 <property name="value_pos">right</property>
@@ -225,7 +255,7 @@
               <object class="GtkScale" id="extTempScale">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="adjustment">defiLinkValAdjustment</property>
+                <property name="adjustment">extTempAdjustment</property>
                 <property name="round_digits">0</property>
                 <property name="digits">0</property>
                 <property name="value_pos">right</property>
@@ -263,7 +293,7 @@
               <object class="GtkScale" id="oilTempScale">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="adjustment">defiLinkValAdjustment</property>
+                <property name="adjustment">oilTempAdjustment</property>
                 <property name="round_digits">0</property>
                 <property name="digits">0</property>
                 <property name="value_pos">right</property>
@@ -301,7 +331,7 @@
               <object class="GtkScale" id="waterTempScale">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="adjustment">defiLinkValAdjustment</property>
+                <property name="adjustment">waterTempAdjustment</property>
                 <property name="round_digits">0</property>
                 <property name="digits">0</property>
                 <property name="value_pos">right</property>
