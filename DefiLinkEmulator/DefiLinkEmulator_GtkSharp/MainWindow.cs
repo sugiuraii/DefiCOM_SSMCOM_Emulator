@@ -1,4 +1,5 @@
 using System;
+using DefiLinkEmulator.Common;
 using Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
 
@@ -16,8 +17,8 @@ namespace DefiLinkEmulator_GtkSharp
         [UI] private Scale waterTempScale = null;
         [UI] private Button startButton = null;
 
-
-        private int _counter;
+        private DefiComOUT defiComOut;
+        private bool _communicate_start;
 
         public MainWindow() : this(new Builder("MainWindow.glade")) { }
 
@@ -26,7 +27,14 @@ namespace DefiLinkEmulator_GtkSharp
             builder.Autoconnect(this);
 
             DeleteEvent += Window_DeleteEvent;
-            //_button1.Clicked += Button1_Clicked;
+            boostScale.ValueChanged += (sender, args) => defiComOut.Boost = (int)boostScale.Value;
+            engRevScale.ValueChanged += (sender, args) => defiComOut.Tacho = (int)engRevScale.Value;
+            oilPresScale.ValueChanged += (sender, args) => defiComOut.Oil_Pres = (int)oilPresScale.Value;
+            fuelPresScale.ValueChanged += (sender, args) => defiComOut.Fuel_Pres = (int)fuelPresScale.Value;
+            extTempScale.ValueChanged  += (sender, args) => defiComOut.Ext_Temp = (int)extTempScale.Value;
+            oilPresScale.ValueChanged  += (sender, args) => defiComOut.Oil_Pres = (int)oilPresScale.Value;
+            oilTempScale.ValueChanged  += (sender, args) => defiComOut.Oil_Temp = (int)oilTempScale.Value;
+            waterTempScale.ValueChanged  += (sender, args) => defiComOut.Water_Temp = (int)waterTempScale.Value;
         }
 
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
