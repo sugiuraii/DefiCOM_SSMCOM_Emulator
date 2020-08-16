@@ -17,8 +17,8 @@ namespace DefiLinkEmulator_GtkSharp
         [UI] private Scale waterTempScale = null;
         [UI] private Button startButton = null;
 
-        private DefiComOUT defiComOut;
-        private bool _communicate_start;
+        private readonly DefiComOUT defiComOut = new DefiComOUT();
+        private bool communicate_start = false;
 
         public MainWindow() : this(new Builder("MainWindow.glade")) { }
 
@@ -26,7 +26,12 @@ namespace DefiLinkEmulator_GtkSharp
         {
             builder.Autoconnect(this);
 
-            DeleteEvent += Window_DeleteEvent;
+            DeleteEvent += (sender, a) => 
+            {
+                defiComOut.communicate_realtime_stop();
+                Application.Quit();
+            };
+
             boostScale.ValueChanged += (sender, args) => defiComOut.Boost = (int)boostScale.Value;
             engRevScale.ValueChanged += (sender, args) => defiComOut.Tacho = (int)engRevScale.Value;
             oilPresScale.ValueChanged += (sender, args) => defiComOut.Oil_Pres = (int)oilPresScale.Value;
@@ -35,18 +40,33 @@ namespace DefiLinkEmulator_GtkSharp
             oilPresScale.ValueChanged  += (sender, args) => defiComOut.Oil_Pres = (int)oilPresScale.Value;
             oilTempScale.ValueChanged  += (sender, args) => defiComOut.Oil_Temp = (int)oilTempScale.Value;
             waterTempScale.ValueChanged  += (sender, args) => defiComOut.Water_Temp = (int)waterTempScale.Value;
-        }
 
-        private void Window_DeleteEvent(object sender, DeleteEventArgs a)
-        {
-            Application.Quit();
+            startButton.Clicked += (sender, args) =>
+            {
+                if (!communicate_start)
+                {
+                    defiComOut.PortName = comPortNameEntry.Text;
+                    communicate_start = true;
+                    startButton.Label = "Stop";
+                    defiComOut.communicate_realtime_start();
+                }
+                else
+                {
+                    startButton.Label = "Start";
+                    communicate_start = false;
+                    defiComOut.communicate_realtime_stop();
+                }
+            };
+
+            defiComOut.COMOUTErrorOccured += (sender, args) => 
+            {
+                var senderobj = (DefiComOUT)sender;
+                communicate_start = false;
+                startButton.Label = "Start";
+                var md = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, args.Message);
+                md.Show();
+                md.Dispose();
+            };
         }
-/*
-        private void Button1_Clicked(object sender, EventArgs a)
-        {
-            _counter++;
-            _label1.Text = "Hello World! This button has been clicked " + _counter + " time(s).";
-        }
-*/
     }
 }
