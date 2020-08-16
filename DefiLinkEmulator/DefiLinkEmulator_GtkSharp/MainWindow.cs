@@ -65,8 +65,9 @@ namespace DefiLinkEmulator_GtkSharp
                 { 
                     communicate_start = false;
                     startButton.Label = "Start";
+                    Console.WriteLine(args.Message);
                     var md = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, args.Message);
-                    md.Show();
+                    md.Run();
                     md.Dispose();
                 });
             };
