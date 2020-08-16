@@ -45,10 +45,19 @@ namespace DefiLinkEmulator_GtkSharp
             {
                 if (!communicate_start)
                 {
-                    defiComOut.PortName = comPortNameEntry.Text;
-                    communicate_start = true;
-                    startButton.Label = "Stop";
-                    defiComOut.communicate_realtime_start();
+                    try
+                    {
+                        defiComOut.PortName = comPortNameEntry.Text;
+                        communicate_start = true;
+                        startButton.Label = "Stop";
+                        defiComOut.communicate_realtime_start();
+                    }
+                    catch(ArgumentException ex)
+                    {
+                        var md = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, ex.Message);
+                        md.Run();
+                        md.Dispose();
+                    }
                 }
                 else
                 {
