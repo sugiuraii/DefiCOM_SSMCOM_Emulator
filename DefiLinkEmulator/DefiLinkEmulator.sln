@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefiLinkEmulator_WinForm", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoCOMEmulator_WinForm", "ArduinoCOMEmulator_WinForm\ArduinoCOMEmulator_WinForm.csproj", "{7749F1CF-D2AF-4A08-8CBB-3806109DFF96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefiLinkEmulator_GtkSharp", "DefiLinkEmulator_GtkSharp\DefiLinkEmulator_GtkSharp.csproj", "{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{7749F1CF-D2AF-4A08-8CBB-3806109DFF96}.Release|x64.Build.0 = Release|Any CPU
 		{7749F1CF-D2AF-4A08-8CBB-3806109DFF96}.Release|x86.ActiveCfg = Release|Any CPU
 		{7749F1CF-D2AF-4A08-8CBB-3806109DFF96}.Release|x86.Build.0 = Release|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Debug|x64.Build.0 = Debug|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Debug|x86.Build.0 = Debug|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Release|x64.ActiveCfg = Release|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Release|x64.Build.0 = Release|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Release|x86.ActiveCfg = Release|Any CPU
+		{8CF7FE14-9786-47B4-A680-1EAAB36A65EA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
